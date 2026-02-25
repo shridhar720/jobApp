@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Http\Resources\UserResource;
 
 class AuthController extends Controller
 {
