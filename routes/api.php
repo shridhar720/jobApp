@@ -36,13 +36,13 @@ Route::prefix('v1')->group(function () {
             Route::put('jobs/{job}',          [JobController::class, 'update']);
             Route::delete('jobs/{job}',       [JobController::class, 'destroy']);
             // Employer reviews applicants for their jobs
-            Route::get('jobs/{job}/applications', [ApplicationController::class, 'index']);
+            Route::get('jobs/{job}/applications', [ApplicationController::class, 'indexByJob']);
             Route::put('applications/{application}/status', [ApplicationController::class, 'updateStatus']);
         });
 
         // Applications — applicant-only: create / view own
         Route::middleware('role:applicant')->group(function () {
-            Route::post('jobs/{job}/apply',      [ApplicationController::class, 'store']);
+            Route::post('jobs/{job}/apply',      [ApplicationController::class, 'storeForJob']);
             Route::get('my-applications',         [ApplicationController::class, 'myApplications']);
         });
     });
