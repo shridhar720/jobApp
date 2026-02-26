@@ -58,7 +58,6 @@ class ApplicationController extends Controller
             ->with('user')
             ->latest()
             ->paginate(20);
-dd($applications);
         return ApplicationResource::collection($applications);
     }
 

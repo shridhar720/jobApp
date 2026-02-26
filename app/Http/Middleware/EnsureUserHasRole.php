@@ -15,7 +15,19 @@ class EnsureUserHasRole
      */
     public function handle(Request $request, Closure $next, string ...$roles): Response
     {
-        if (! in_array($request->user()?->role, $roles)) {
+        // allow passing descriptive names as well as numeric values
+        $map = [
+            'applicant' => '1',
+            'employer'  => '2',
+        ];
+
+        $normalized = array_map(function ($role) use ($map) {
+            return $map[$role] ?? $role;
+        }, $roles);
+
+        $userRole = (string) $request->user()?->role;
+
+        if (! in_array($userRole, $normalized)) {
             return response()->json([
                 'message' => 'Forbidden. Required role: ' . implode(' or ', $roles),
             ], 403);
