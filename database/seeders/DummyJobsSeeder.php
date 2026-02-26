@@ -10,13 +10,13 @@ class DummyJobsSeeder extends Seeder
 {
     public function run()
     {
-        $employer = User::where('role', 2)->first();
+        $employer = User::where('role', '2')->first();
         if (! $employer) {
             $employer = User::first();
         }
 
         Job::create([
-            'user_id' => $employer->id,
+            'employer_id' => $employer->id,
             'title' => 'Frontend Developer',
             'description' => 'Build UI components',
             'type' => 'full-time',
@@ -24,7 +24,7 @@ class DummyJobsSeeder extends Seeder
         ]);
 
         Job::create([
-            'user_id' => $employer->id,
+            'employer_id' => $employer->id,
             'title' => 'Backend Developer',
             'description' => 'Build APIs and background jobs',
             'type' => 'full-time',

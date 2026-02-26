@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('job_id')->nullable()->constrained('jobs')->nullOnDelete();
+            $table->foreignId('job_id')->nullable()->constrained('laraveljobs')->nullOnDelete();
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->string('email')->nullable()->index();
+            $table->string('cv_path')->nullable();
             $table->text('cover_letter')->nullable();
             $table->string('status')->default('submitted')->index();
             $table->timestamps();

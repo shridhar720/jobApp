@@ -25,7 +25,7 @@ class EnsureUserHasRole
             return $map[$role] ?? $role;
         }, $roles);
 
-        $userRole = (string) $request->user()?->role;
+        $userRole = $request->user()?->role?->value;
 
         if (! in_array($userRole, $normalized)) {
             return response()->json([
